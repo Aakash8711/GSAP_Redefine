@@ -71,15 +71,12 @@ const Features = () => {
             <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[65vh]">
                 <BentoCard
                     src="videos/feature-1.mp4"
-                    title={<>radi<b>n</b>t</>}
+                    title={<>radia<b>n</b>t</>}
                     description="A cross-platform metagame app, turning your activities across Web2 and Web3 game into a rewarding adventure."
                 />
             </BentoTilt>
 
             <div className="grid h-[135vh] grid-cols-1 grid-rows-none gap-7 md:grid-cols-2 md:grid-rows-3">
-                {/* <div className="bento-tilt_1 md:col-start-1 md:row-start-1 md:row-span-2"> */}
-                {/* <div className="bento-tilt_1  row-span-1 md:row-span-2"> */}
-                {/* <div className="bento-tilt_1  md:col-start-1 md:row-start-1 md:row-span-2"> */}
                 <BentoTilt className="bento-tilt_1 md:col-start-1 md:row-start-1 md:row-span-2">
                     <BentoCard
                         src="videos/feature-2.mp4"
@@ -88,9 +85,6 @@ const Features = () => {
                     />
                 </BentoTilt>
 
-                {/* <div className="bento-tilt_1 ms-32 md:col-start-2 md:row-start-1 md:ms-0"> */}
-                {/* <div className="bento-tilt_1 ms-32 row-span-1 md:col-start-2 md:row-start-1 md:ms-0"> */}
-                {/* <div className="bento-tilt_1 md:col-start-2 md:row-start-1"> */}
                 <BentoTilt className="bento-tilt_1 ms-32 md:col-start-2 md:row-start-1 md:ms-0">
                     <BentoCard
                         src="videos/feature-3.mp4"
@@ -99,9 +93,6 @@ const Features = () => {
                     />
                 </BentoTilt>
 
-                {/* <div className="bento-tilt_1 me-14 md:col-start-2 md:row-start-2 md:me-0"> */}
-                {/* <div className="bento-tilt_1 me-14 row-span-1 md:col-start-2 md:row-start-2 md:me-0"> */}
-                {/* <div className="bento-tilt_1 md:col-start-2 md:row-start-2"> */}
                 <BentoTilt className="bento-tilt_1 me-14 md:col-start-2 md:row-start-2 md:me-0">
                     <BentoCard
                         src="videos/feature-4.mp4"

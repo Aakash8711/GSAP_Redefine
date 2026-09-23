@@ -7,6 +7,45 @@ import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(ScrollTrigger)
 
+const MaskClipTilt = ({ children, className = '', onClick }) => {
+    const [transformStyle, setTransformStyle] = useState('')
+    const itemRef = useRef()
+
+    const handleMouseMove = (e) => {
+        if( !itemRef.current ) return
+
+        const { left, top, width, height } = itemRef.current.getBoundingClientRect()
+
+        const relativeX = (e.clientX - left) / width
+        const relativeY = (e.clientY - top) / height
+
+        const tiltX = (relativeY - 0.5) * 20
+        const tiltY = (relativeX - 0.5) * -20
+
+        const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(0.98, 0.98, 0.98)`
+
+
+        setTransformStyle(newTransform)
+    }
+
+    const handleMouseLeave = () => {
+        setTransformStyle('')
+    }
+
+    return (
+        <div
+            ref={itemRef}
+            className={className}
+            onClick={onClick}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ transform: transformStyle }}
+        >
+            {children}
+        </div>
+    )
+}
+
 const Hero = () => {
     const [currentIndex, setCurrentIndex] = useState(1)
     const [hasClicked, setHasClicked] = useState(false)
@@ -95,23 +134,27 @@ const Hero = () => {
         )}
         <div id="video-frame" className="relative z-10 h-dvh w-screen overflow-hidden rounded-lg bg-blue-75">
             <div>
-                <div className="mask-clip-path absolute-center absolute z-50 size-64 cursor-pointer overflow-hidden rounded-lg">
-                    <div onClick={handleMiniVdClick} className="origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100">
-                        <video
-                            // autoPlay
-                            ref={nextVideoRef}
-                            src={getVideoSrc(upcomingVideoIndex)}
-                            loop
-                            muted
-                            id="current-video"
-                            className="size-64 origin-center scale-150 object-cover object-center"
-                            onLoadedData={handleVideoLoad}
-                        />
-                    </div>
+                <div className="absolute-center absolute z-50 size-64">
+                    <MaskClipTilt
+                        onClick={handleMiniVdClick}
+                        className="mask-clip-path size-full cursor-pointer overflow-hidden rounded-lg">
+                        <div className="size-full origin-center scale-50 opacity-0 transition-all duration-500 ease-in hover:scale-100 hover:opacity-100">
+                            <video
+                                autoPlay
+                                ref={nextVideoRef}
+                                src={getVideoSrc(upcomingVideoIndex)}
+                                loop
+                                muted
+                                id="current-video"
+                                className="size-64 origin-center scale-150 object-cover object-center"
+                                onLoadedData={handleVideoLoad}
+                            />
+                        </div>
+                    </MaskClipTilt>
                 </div>
 
                 <video
-                    // autoPlay
+                    autoPlay
                     ref={nextVideoRef}
                     src={getVideoSrc(currentIndex)}
                     loop
@@ -122,12 +165,11 @@ const Hero = () => {
                 />
 
                 <video
-                    // autoPlay
+                    autoPlay
                     ref={nextVideoRef}
                     src={getVideoSrc(currentIndex === totalVideos - 1 ? 1 : currentIndex)}
                     loop
                     muted
-                    // id="next-video"
                     className="absolute left-0 top-0 size-full object-cover object-center"
                     onLoadedData={handleVideoLoad}
                 />
